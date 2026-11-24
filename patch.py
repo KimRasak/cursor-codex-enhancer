@@ -136,6 +136,12 @@ def patch_extension_js(ext_dir: Path) -> None:
     if old_sub in txt:
         txt = txt.replace(old_sub, new_sub, 1)
 
+    # Force Codex to use the primary Left Sidebar (codexViewContainer) instead of Right Secondary Sidebar
+    old_sec_check = "function lI(t){let e=ayt(t);return e==null?!1:e.major!==rj.major?e.major>rj.major:e.minor>=rj.minor}"
+    new_sec_check = "function lI(t){return!1}"
+    if old_sec_check in txt:
+        txt = txt.replace(old_sec_check, new_sec_check, 1)
+
     ext_js.write_text(txt, encoding="utf-8")
 
 
